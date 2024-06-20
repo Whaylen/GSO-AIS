@@ -1,7 +1,9 @@
 <script setup>
 import { ref, inject, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router';
 
 const api = inject('$api')
+const router = useRouter()
 
 const PARForm = ref({
     scanned_documents: '',
@@ -30,9 +32,18 @@ const PARForm = ref({
 
 async function submit(){
     const response = await api.post('/par', PARForm.value)
+        router.push({name: 'par'})
     console.log(response.data)
 
 }
+// async function submit(){
+//     try {
+//         const response = await api.post('/par', PARform.value)
+//         router.push({ name: 'par' })
+//     } catch (error) {
+//         console.error("Error adding data:", error)
+//     }
+// }
 
 //TODO:: Fix this shit
 function removeCustodian(custodian){
