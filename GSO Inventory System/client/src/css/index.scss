@@ -1,0 +1,20 @@
+@use "tailwindcss/base";
+@use "tailwindcss/components";
+@use "tailwindcss/utilities";
+
+@use "material-icons/iconfont/material-icons.css";
+
+@use "@vuepic/vue-datepicker/dist/main.css";
+@use "vue-accessible-color-picker/styles";
+
+@use "./app.scss";
+@use "./components/index.scss" as componentStyle;
+
+@use "sass:meta";
+
+html {
+  @include meta.load-css("highlight.js/styles/stackoverflow-light");
+}
+html[class="dark"] {
+  @include meta.load-css("highlight.js/styles/stackoverflow-dark");
+}
