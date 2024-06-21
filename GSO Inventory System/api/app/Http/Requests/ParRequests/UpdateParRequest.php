@@ -11,8 +11,8 @@ class UpdateParRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // return auth()->user()->hasAnyPermission('par_create') || auth()->user()->isSuperAdmin();
-        return false
+        return auth()->user()->hasAnyPermission('par_update') || auth()->user()->isSuperAdmin();
+        // return false
     }
 
     /**

@@ -9,7 +9,7 @@ const par = ref(null)
 async function fetchPar() {
     const response = await api.get(`/par/${route.params.id}`)
     par.value = response.data
-    parForm.defaults({
+    PARForm.defaults({
         article:response.data.article,
         date_received:response.data.date_received,
         brand_model:response.data.brand_model,
@@ -22,14 +22,14 @@ async function fetchPar() {
         total_value:response.data.total_value,
         unit_of_measure:response.data.unit_of_measure
     })
-    parForm.reset()
+    PARForm.reset()
 }
 
 async function submit(){
-    await parForm.validate()
-    console.log("Form Errors: ", parForm.hasErrors)
-    if(!parForm.hasErrors){
-        const response = await parForm.submit('patch', `/par/${route.params.id}`)
+    await PARForm.validate()
+    console.log("Form Errors: ", PARForm.hasErrors)
+    if(!PARForm.hasErrors){
+        const response = await PARForm.submit('patch', `/par/${route.params.id}`)
         if(response.status == 200){
             await fetchPar()
         }
@@ -39,17 +39,17 @@ async function submit(){
 await fetchPar()
 </script>
 <template>
-    <!-- <div v-if="par" class="p-12">
+    <div v-if="par" class="p-12">
         <div class="grid grid-cols-2">
-            <Component :is="parForm.meta[field]?.component ?? 'TInput'"
-                v-for="(value, field) in parForm.data()" v-model="parForm[field]"
-                :label="parForm.meta[field]?.label ?? Helpers.snakeToHuman(field)"
-                :type="parForm.meta[field]?.type ?? 'text'"
-                :error="Boolean(parForm.errors[field])" :errorMessage="parForm.errors[field]"
-                :hint="parForm.meta[field]?.hint ?? ''"
-                v-bind="parForm.meta[field]?.bindings">
+            <Component :is="PARForm.meta[field]?.component ?? 'TInput'"
+                v-for="(value, field) in PARForm.data()" v-model="PARForm[field]"
+                :label="PARForm.meta[field]?.label ?? Helpers.snakeToHuman(field)"
+                :type="PARForm.meta[field]?.type ?? 'text'"
+                :error="Boolean(PARForm.errors[field])" :errorMessage="PARForm.errors[field]"
+                :hint="PARForm.meta[field]?.hint ?? ''"
+                v-bind="PARForm.meta[field]?.bindings">
             </Component>
-            <button v-if="parForm.isDirty" @click="submit" type="button">Save</button>
+            <button v-if="PARForm.isDirty" @click="submit" type="button">Save</button>
         </div>
-    </div> -->
+    </div>
 </template>
